@@ -52,19 +52,33 @@ function showRandomProductImage() {
   let productImageCheck = [];
 
   for(let i = 0; i < productImageIds.length; i++) {
-    let randomProductImage = Math.floor(Math.random() * allProducts.length);
+    let randomProductImage = randomize();
     let product = allProducts[randomProductImage];
     let productImage = document.getElementById(productImageIds[i]);
 
     productImageCheck.push(productImage);
     allProducts[randomProductImage].views++;
 
-    for(let j = 0; j < productImageCheck.length; j ++) {
-      while(productImageCheck[j] === productImageCheck[j -1]) {
-        randomProductImage = Math.floor(Math.random() *allProducts.length);
-        console.log('duplicate found');
+    // for(let j = 0; j < productImageCheck.length; j ++) {
+    //   while(productImageCheck[j] === productImageCheck[j -1]) {
+    //     randomProductImage = Math.floor(Math.random() *allProducts.length);
+    //     console.log('duplicate found');
+    //   }
+    // }
+
+    for(let j = 0; j < productImageCheck.length; j++) {
+      let valuesSoFar = [];
+      let value = productImageCheck[i].alt;
+      if (valuesSoFar.indexOf(value) !== -1) {
+        randomize();
       }
+      valuesSoFar.push(value);
     }
+
+    // while (productImageCheck.alt === product.name) {
+    //   randomProductImage = randomize();
+    //   console.log('duplicate found');
+    // }
 
     // Object.assign() solution suggested by George Mauer with Operation Code
     Object.assign(productImage, {
@@ -73,16 +87,15 @@ function showRandomProductImage() {
       title: product.name,
     });
 
-    // while (productImage.alt === allProducts[randomProductImage].name) {
-    //   randomProductImage = Math.floor(Math.random() * allProducts.length);
-    //   console.log('duplicate found');
-    // }
-
     console.log(productImageIds[i]);
-    // console.log(productImage.alt);
-    console.log(productImageCheck[0].alt);
+    console.log(productImage.alt);
+    console.log(productImageCheck[i].alt);
     console.log(allProducts[randomProductImage].name);
   }
+}
+
+function randomize() {
+  return Math.floor(Math.random() * allProducts.length);
 }
 
 showRandomProductImage();
