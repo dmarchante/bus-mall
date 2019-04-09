@@ -1,3 +1,7 @@
+// ++++++++++++++++++++++++++++++++++++++++++++
+// DATA - Variable declarations
+// ++++++++++++++++++++++++++++++++++++++++++++
+
 const productone = document.getElementById('productone');
 const producttwo = document.getElementById('producttwo');
 const productthree = document.getElementById('productthree');
@@ -5,6 +9,10 @@ const productthree = document.getElementById('productthree');
 let allProducts = [];
 let previousProductImage = [];
 let currentProductImage = [];
+
+// ++++++++++++++++++++++++++++++++++++++++++++
+// DATA - Constructor and instances
+// ++++++++++++++++++++++++++++++++++++++++++++
 
 function ProductImage(name, extension) {
   this.extension = extension;
@@ -48,6 +56,10 @@ function createProductReference() {
   }
 }
 
+// ++++++++++++++++++++++++++++++++++++++++++++
+// FUNCTION DECLARATIONS
+// ++++++++++++++++++++++++++++++++++++++++++++
+
 function showRandomProductImage() {
   const productImageIds = [
     'productone',
@@ -90,12 +102,80 @@ function aggregateVote(product) {
     if (product === allProducts[i].name) {
       allProducts[i].votes++;
       console.log(allProducts[i].votes);
-      // updateChartArrays();
+      updateChartData();
     }
   }
 }
 
 showRandomProductImage();
+
+// ++++++++++++++++++++++++++++++++++++++++++++
+// CHART
+// Charts rendered using Chart JS v.2.6.0
+// http://www.chartjs.org/
+// ++++++++++++++++++++++++++++++++++++++++++++
+
+let chartRendered = false;
+let productChart;
+let votes = [];
+let names = [];
+
+const data = {
+  labels: names, // names array we declared earlier
+  datasets: [{
+    data: votes, // votes array we declared earlier
+    backgroundColor: [
+      'bisque',
+      'darkgray',
+      'burlywood',
+      'lightblue',
+      'navy'
+    ],
+    hoverBackgroundColor: [
+      'purple',
+      'purple',
+      'purple',
+      'purple',
+      'purple'
+    ]
+  }]
+};
+
+function updateChartData() {
+  for (var i = 0; i < allProducts.length; i++) {
+    names[i] = allProducts[i].name;
+    votes[i] = allProducts[i].votes;
+  }
+}
+
+function renderChart() {
+  const ctx = document.getElementById('product-chart').getContext('2d');
+  productChart = new Chart(ctx, {
+    type: 'polarArea',
+    data: data,
+    options: {
+      responsive: false,
+      animation: {
+        duration: 1000,
+        easing: 'easeOutBounce'
+      }
+    },
+    scales: {
+      yAxes: [{
+        ticks: {
+          max: 10,
+          min: 0,
+          stepSize: 1.0
+        }
+      }]
+    }
+  });
+  chartRendered = true;
+}
+
+// ++++++++++++++++++++++++++++++++++++++++++++
+// EVENT LISTENERS
+// ++++++++++++++++++++++++++++++++++++++++++++
 
 productone.addEventListener('click', handleProductImageClick);
 producttwo.addEventListener('click', handleProductImageClick);
@@ -106,7 +186,12 @@ document.getElementById('votingsection').addEventListener('click', function(even
     aggregateVote(event.target.alt);
   }
 
-  // if (chartDrawn) {
-  //   songChart.update();
-  // }
+  if (chartRendered) {
+    productChart.update();
+  }
+});
+
+document.getElementById('render-chart').addEventListener('click', function() {
+  renderChart();
+  console.log('chart was drawn');
 });
