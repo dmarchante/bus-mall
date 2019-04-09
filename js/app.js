@@ -9,6 +9,7 @@ const productthree = document.getElementById('productthree');
 let allProducts = [];
 let previousProductImage = [];
 let currentProductImage = [];
+let clickCount = 0;
 
 // ++++++++++++++++++++++++++++++++++++++++++++
 // DATA - Constructor and instances
@@ -94,14 +95,19 @@ function showRandomProductImage() {
 }
 
 function handleProductImageClick() {
-  showRandomProductImage();
+  if (clickCount <= 25) {
+    showRandomProductImage();
+    clickCount++;
+  } else {
+    alert('Votes are limited to 25 per visit.')
+  }
 }
 
 function aggregateVote(product) {
   for (var i = 0; i < allProducts.length; i++) {
     if (product === allProducts[i].name) {
       allProducts[i].votes++;
-      console.log(allProducts[i].votes);
+      // console.log(allProducts[i].votes);
       updateChartData();
     }
   }
@@ -125,18 +131,50 @@ const data = {
   datasets: [{
     data: votes, // votes array we declared earlier
     backgroundColor: [
-      'bisque',
-      'darkgray',
-      'burlywood',
-      'lightblue',
-      'navy'
+      '#e6194b',
+      '#3cb44b',
+      '#ffe119',
+      '#4363d8',
+      '#f58231',
+      '#911eb4',
+      '#46f0f0',
+      '#f032e6',
+      '#bcf60c',
+      '#fabebe',
+      '#008080',
+      '#e6beff',
+      '#9a6324',
+      '#fffac8',
+      '#800000',
+      '#aaffc3',
+      '#808000',
+      '#ffd8b1',
+      '#000075',
+      '#808080',
+      '#ffffff',
+      '#000000'
     ],
     hoverBackgroundColor: [
-      'purple',
-      'purple',
-      'purple',
-      'purple',
-      'purple'
+      '#97978F',
+      '#97978F',
+      '#97978F',
+      '#97978F',
+      '#97978F',
+      '#97978F',
+      '#97978F',
+      '#97978F',
+      '#97978F',
+      '#97978F',
+      '#97978F',
+      '#97978F',
+      '#97978F',
+      '#97978F',
+      '#97978F',
+      '#97978F',
+      '#97978F',
+      '#97978F',
+      '#97978F',
+      '#97978F',
     ]
   }]
 };
@@ -151,7 +189,7 @@ function updateChartData() {
 function renderChart() {
   const ctx = document.getElementById('product-chart').getContext('2d');
   productChart = new Chart(ctx, {
-    type: 'polarArea',
+    type: 'bar',
     data: data,
     options: {
       responsive: false,

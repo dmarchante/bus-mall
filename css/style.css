@@ -76,6 +76,11 @@ main div button {
   width: 100%;
 }
 
+canvas {
+  margin-bottom: 30px;
+  margin: 0 auto;
+}
+
 footer div h2 {
   padding-top: 30px;
 }
