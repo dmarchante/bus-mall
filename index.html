@@ -13,21 +13,29 @@
 <body>
   <header>
     <div>
-      <h2>Bus Mall</h2>
+      <h1>Bus Mall</h1>
       <nav>
         <ul>
-          <li>About</li>
-          <li>Products</li>
+          <li>
+            <a href="#about">
+              About
+            </a>
+          </li>
+          <li>
+            <a href="#products">
+              Products
+            </a>
+          </li>
         </ul>
       </nav>
     </div>
   </header>
   <main>
-    <img src="./assets/hero.jpg" alt="rail transportation" title="rail transportation">
-    <div>
+    <div class="hero-image"></div>
+    <div id="about">
       <h2>About Us</h2>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ridiculus mus mauris vitae ultricies leo integer malesuada nunc vel. Nunc vel risus commodo viverra. Eu non diam phasellus vestibulum lorem. Nam libero justo laoreet sit amet cursus sit amet dictum. Nulla pharetra diam sit amet nisl suscipit adipiscing.</p>
-      <section>
+      <section id="products">
         <h2>Products</h2>
         <ul id="votingsection">
           <li>
@@ -41,8 +49,9 @@
           </li>
         </ul>
       </section>
-      <button id="render-chart">Show Chart</button>
-      <p></p>
+      <div>
+        <button id="render-chart">Show Chart</button>
+      </div>
     </div>
   </main>
   <canvas id="product-chart" width="800px" height="400px"></canvas>
