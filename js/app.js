@@ -211,6 +211,22 @@ function renderChart() {
   chartRendered = true;
 }
 
+function clearChart() {
+  votes = [];
+  names = [];
+  data.labels = names;
+  data.datasets.votes = votes;
+  productChart.destroy();
+}
+
+// function resetChart() {
+//   votes = [];
+//   names = [];
+//   data.labels = names;
+//   data.datasets.votes = votes;
+//   productChart.reset();
+// }
+
 // ++++++++++++++++++++++++++++++++++++++++++++
 // EVENT LISTENERS
 // ++++++++++++++++++++++++++++++++++++++++++++
@@ -231,5 +247,12 @@ document.getElementById('votingsection').addEventListener('click', function(even
 
 document.getElementById('render-chart').addEventListener('click', function() {
   renderChart();
-  console.log('chart was drawn');
 });
+
+document.getElementById('clear-chart').addEventListener('click', function() {
+  clearChart();
+});
+
+// document.getElementById('reset-chart').addEventListener('click', function() {
+//   resetChart();
+// });

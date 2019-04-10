@@ -47,7 +47,7 @@ header div {
 }
 
 header div h1 {
-  margin-top: 30px;
+  margin-top: 45px;
 }
 
 nav ul {
@@ -66,6 +66,7 @@ a {
   text-decoration: none;
 }
 
+/*source: Parker Bennet - https://codepen.io/parkerbennett/pen/FcsBI*/
 .hero-image {
 	height: 770px;
   width: 100%; 
@@ -73,26 +74,28 @@ a {
 	background-position: center bottom;
   background-size: cover;
   background-position: center center;
-  margin-bottom: 60px;
+  margin-bottom: 45px;
 }
 
 main div h2 {
-  margin-bottom: 30px;
+  margin-bottom: 45px;
   text-align: center;
 }
 
 main img {
   width: 100%;
-  margin-bottom: 60px;
+  /* margin-bottom: 45px; */
 }
 
 main div p {
-  margin-bottom: 60px;
+  margin-bottom: 45px;
 }
 
 main div div {
-  width: 250px;
+  width: 500px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: row;
 }
 
 button {
@@ -102,40 +105,44 @@ button {
   background-color: #000;
   opacity: .5;
   color: #fff;
+  margin-right: 45px;
 }
 
 section h2 {
-  margin-bottom: 30px;
+  margin-bottom: 45px;
   text-align: center;
 }
 
 section ul {
   display: flex;
   flex-direction: row;
-  margin-bottom: 60px;
+  margin-bottom: 45px;
   justify-content: space-between;
-
+  /* border: 1px solid black; */
+  border-radius: 25px;
+  background-color: #808080;
 }
 
 section ul li {
   width: 25%;
   height: auto;
+  padding: 30px;
 }
 
 section ul li img {
-  border: 1px solid black;
+  border: 1px solid fff;
 }
 
 main div button {
-  margin-bottom: 60px;
+  margin-bottom: 45px;
   width: 100%;
 }
 
 canvas {
-  margin-bottom: 60px;
+  margin-bottom: 45px;
   margin: 0 auto;
 }
 
 footer div h2 {
-  padding-top: 30px;
+  padding-top: 45px;
 }
