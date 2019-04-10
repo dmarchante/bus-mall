@@ -231,10 +231,6 @@ function clearChart() {
 // EVENT LISTENERS
 // ++++++++++++++++++++++++++++++++++++++++++++
 
-productone.addEventListener('click', handleProductImageClick);
-producttwo.addEventListener('click', handleProductImageClick);
-productthree.addEventListener('click', handleProductImageClick);
-
 document.getElementById('votingsection').addEventListener('click', function(event) {
   if (event.target.id !== 'votingsection') {
     aggregateVote(event.target.alt);
@@ -243,6 +239,8 @@ document.getElementById('votingsection').addEventListener('click', function(even
   if (chartRendered) {
     productChart.update();
   }
+
+  handleProductImageClick();
 });
 
 document.getElementById('render-chart').addEventListener('click', function() {
