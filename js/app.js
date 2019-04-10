@@ -3,6 +3,7 @@
 // ++++++++++++++++++++++++++++++++++++++++++++
 
 let allProducts = [];
+let allProductsStringified;
 let previousProductImage = [];
 let currentProductImage = [];
 let clickCount = 0;
@@ -56,6 +57,17 @@ function createProductReference() {
 // ++++++++++++++++++++++++++++++++++++++++++++
 // FUNCTION DECLARATIONS
 // ++++++++++++++++++++++++++++++++++++++++++++
+function productPageLoad() {
+  allProductsStringified = JSON.parse(localStorage.getItem('marketData'));
+
+  if(allProductsStringified) {
+    allProducts = Object.values(allProductsStringified);
+    showRandomProductImage();
+    updateChartData();
+  } else {
+    showRandomProductImage();
+  }
+}
 
 function showRandomProductImage() {
   const productImageIds = [
@@ -88,12 +100,18 @@ function showRandomProductImage() {
       title: product.name,
     });
   }
+
+  allProductsStringified = allProducts;
 }
 
 function handleProductImageClick() {
   if (clickCount <= 25) {
     showRandomProductImage();
     clickCount++;
+  } else {
+    document.getElementById('votingsection').removeEventListener('click', voteEventHandler);
+    allProductsStringified = JSON.stringify(allProducts);
+    localStorage.setItem('marketData', allProductsStringified);
   }
 }
 
@@ -107,13 +125,24 @@ function aggregateVote(product) {
   }
 }
 
-showRandomProductImage();
+function voteEventHandler(event) {
+  if (event.target.id !== 'votingsection') {
+    aggregateVote(event.target.alt);
+  }
+
+  if (chartRendered) {
+    productChart.update();
+  }
+
+  handleProductImageClick();
+}
 
 // ++++++++++++++++++++++++++++++++++++++++++++
 // CHART
 // Charts rendered using Chart JS v.2.6.0
 // http://www.chartjs.org/
 // ++++++++++++++++++++++++++++++++++++++++++++
+
 let chartRendered = false;
 let productChart;
 let votes = [];
@@ -220,21 +249,12 @@ function clearChart() {
 //   productChart.reset();
 // }
 
+productPageLoad();
 // ++++++++++++++++++++++++++++++++++++++++++++
 // EVENT LISTENERS
 // ++++++++++++++++++++++++++++++++++++++++++++
 
-document.getElementById('votingsection').addEventListener('click', function(event) {
-  if (event.target.id !== 'votingsection') {
-    aggregateVote(event.target.alt);
-  }
-
-  if (chartRendered) {
-    productChart.update();
-  }
-
-  handleProductImageClick();
-});
+document.getElementById('votingsection').addEventListener('click', voteEventHandler);
 
 document.getElementById('render-chart').addEventListener('click', function() {
   renderChart();
