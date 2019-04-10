@@ -1,3 +1,7 @@
+// ++++++++++++++++++++++++++++++++++++++++++++
+// DATA - Variable declarations
+// ++++++++++++++++++++++++++++++++++++++++++++
+
 const productone = document.getElementById('productone');
 const producttwo = document.getElementById('producttwo');
 const productthree = document.getElementById('productthree');
@@ -5,6 +9,11 @@ const productthree = document.getElementById('productthree');
 let allProducts = [];
 let previousProductImage = [];
 let currentProductImage = [];
+let clickCount = 0;
+
+// ++++++++++++++++++++++++++++++++++++++++++++
+// DATA - Constructor and instances
+// ++++++++++++++++++++++++++++++++++++++++++++
 
 function ProductImage(name, extension) {
   this.extension = extension;
@@ -48,6 +57,10 @@ function createProductReference() {
   }
 }
 
+// ++++++++++++++++++++++++++++++++++++++++++++
+// FUNCTION DECLARATIONS
+// ++++++++++++++++++++++++++++++++++++++++++++
+
 function showRandomProductImage() {
   const productImageIds = [
     'productone',
@@ -82,20 +95,141 @@ function showRandomProductImage() {
 }
 
 function handleProductImageClick() {
-  showRandomProductImage();
+  if (clickCount <= 25) {
+    showRandomProductImage();
+    clickCount++;
+  } else {
+    alert('Votes are limited to 25 per visit.')
+  }
 }
 
 function aggregateVote(product) {
   for (var i = 0; i < allProducts.length; i++) {
     if (product === allProducts[i].name) {
       allProducts[i].votes++;
-      console.log(allProducts[i].votes);
-      // updateChartArrays();
+      // console.log(allProducts[i].votes);
+      updateChartData();
     }
   }
 }
 
 showRandomProductImage();
+
+// ++++++++++++++++++++++++++++++++++++++++++++
+// CHART
+// Charts rendered using Chart JS v.2.6.0
+// http://www.chartjs.org/
+// ++++++++++++++++++++++++++++++++++++++++++++
+
+let chartRendered = false;
+let productChart;
+let votes = [];
+let names = [];
+
+const data = {
+  labels: names, // names array we declared earlier
+  datasets: [{
+    data: votes, // votes array we declared earlier
+    backgroundColor: [
+      '#e6194b',
+      '#3cb44b',
+      '#ffe119',
+      '#4363d8',
+      '#f58231',
+      '#911eb4',
+      '#46f0f0',
+      '#f032e6',
+      '#bcf60c',
+      '#fabebe',
+      '#008080',
+      '#e6beff',
+      '#9a6324',
+      '#fffac8',
+      '#800000',
+      '#aaffc3',
+      '#808000',
+      '#ffd8b1',
+      '#000075',
+      '#808080',
+      '#ffffff',
+      '#000000'
+    ],
+    hoverBackgroundColor: [
+      '#97978F',
+      '#97978F',
+      '#97978F',
+      '#97978F',
+      '#97978F',
+      '#97978F',
+      '#97978F',
+      '#97978F',
+      '#97978F',
+      '#97978F',
+      '#97978F',
+      '#97978F',
+      '#97978F',
+      '#97978F',
+      '#97978F',
+      '#97978F',
+      '#97978F',
+      '#97978F',
+      '#97978F',
+      '#97978F',
+    ]
+  }]
+};
+
+function updateChartData() {
+  for (var i = 0; i < allProducts.length; i++) {
+    names[i] = allProducts[i].name;
+    votes[i] = allProducts[i].votes;
+  }
+}
+
+function renderChart() {
+  const ctx = document.getElementById('product-chart').getContext('2d');
+  productChart = new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    options: {
+      responsive: false,
+      animation: {
+        duration: 1000,
+        easing: 'easeOutBounce'
+      }
+    },
+    scales: {
+      yAxes: [{
+        ticks: {
+          max: 10,
+          min: 0,
+          stepSize: 1.0
+        }
+      }]
+    }
+  });
+  chartRendered = true;
+}
+
+function clearChart() {
+  votes = [];
+  names = [];
+  data.labels = names;
+  data.datasets.votes = votes;
+  productChart.destroy();
+}
+
+// function resetChart() {
+//   votes = [];
+//   names = [];
+//   data.labels = names;
+//   data.datasets.votes = votes;
+//   productChart.reset();
+// }
+
+// ++++++++++++++++++++++++++++++++++++++++++++
+// EVENT LISTENERS
+// ++++++++++++++++++++++++++++++++++++++++++++
 
 productone.addEventListener('click', handleProductImageClick);
 producttwo.addEventListener('click', handleProductImageClick);
@@ -106,7 +240,19 @@ document.getElementById('votingsection').addEventListener('click', function(even
     aggregateVote(event.target.alt);
   }
 
-  // if (chartDrawn) {
-  //   songChart.update();
-  // }
+  if (chartRendered) {
+    productChart.update();
+  }
 });
+
+document.getElementById('render-chart').addEventListener('click', function() {
+  renderChart();
+});
+
+document.getElementById('clear-chart').addEventListener('click', function() {
+  clearChart();
+});
+
+// document.getElementById('reset-chart').addEventListener('click', function() {
+//   resetChart();
+// });

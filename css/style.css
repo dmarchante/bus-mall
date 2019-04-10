@@ -1,12 +1,37 @@
+@import url('https://fonts.googleapis.com/css?family=Heebo');
+@import url('https://fonts.googleapis.com/css?family=Oswald');
+
 body {
-  font-family: sans-serif;
+  font-family: 'Heebo', sans-serif;
   margin: 0;
 }
 
+h1, h2, h3 {
+  font-family: 'Oswald', sans-serif;
+  color: #808080;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+h2 {
+  font-size: 24px;
+}
+
 header, footer {
-  background-color: rgb(104, 187, 104);
-  height: 100px;
+  background-color: #000;
+  opacity: .5;
   width: 100%;
+  height: 100px;
+}
+
+header h1, footer h2, ul a {
+  color: #fff;
+}
+
+header {
+  position: absolute;
 }
 
 header div, main div, footer div {
@@ -21,61 +46,103 @@ header div {
   margin: 0 auto;
 }
 
-header div h2 {
-  margin-top: 30px;
+header div h1 {
+  margin-top: 45px;
 }
 
 nav ul {
   display: flex;
   flex-direction: row;
-  margin-top: 30px;
+  margin-top: 46px;
 }
 
 nav ul li {
   margin-left: 25px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 20px;
+}
+
+a {
+  text-decoration: none;
+}
+
+/*source: Parker Bennet - https://codepen.io/parkerbennett/pen/FcsBI*/
+.hero-image {
+	height: 770px;
+  width: 100%; 
+  background-image: url(../assets/waterfront_shuttle.jpg);
+	background-position: center bottom;
+  background-size: cover;
+  background-position: center center;
+  margin-bottom: 45px;
+}
+
+main div h2 {
+  margin-bottom: 45px;
+  text-align: center;
 }
 
 main img {
   width: 100%;
-  margin-bottom: 30px;
-}
-
-main div h2 {
-  margin-bottom: 30px;
-  text-align: center;
+  /* margin-bottom: 45px; */
 }
 
 main div p {
-  margin-bottom: 30px;
+  margin-bottom: 45px;
+}
+
+main div div {
+  width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+}
+
+button {
+  padding: 15px;
+  font-size: 18px;
+  border-radius: 15px;
+  background-color: #000;
+  opacity: .5;
+  color: #fff;
+  margin-right: 45px;
 }
 
 section h2 {
-  margin-bottom: 30px;
+  margin-bottom: 45px;
   text-align: center;
 }
 
 section ul {
   display: flex;
   flex-direction: row;
-  margin-bottom: 30px;
+  margin-bottom: 45px;
   justify-content: space-between;
-
+  /* border: 1px solid black; */
+  border-radius: 25px;
+  background-color: #808080;
 }
 
 section ul li {
   width: 25%;
   height: auto;
+  padding: 30px;
 }
 
 section ul li img {
-  border: 1px solid black;
+  border: 1px solid fff;
 }
 
 main div button {
-  margin-bottom: 30px;
+  margin-bottom: 45px;
   width: 100%;
 }
 
+canvas {
+  margin-bottom: 45px;
+  margin: 0 auto;
+}
+
 footer div h2 {
-  padding-top: 30px;
+  padding-top: 45px;
 }
