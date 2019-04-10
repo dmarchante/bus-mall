@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Heebo');
 @import url('https://fonts.googleapis.com/css?family=Oswald');
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Heebo', sans-serif;
   margin: 0;
