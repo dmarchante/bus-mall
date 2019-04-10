@@ -2,10 +2,6 @@
 // DATA - Variable declarations
 // ++++++++++++++++++++++++++++++++++++++++++++
 
-const productone = document.getElementById('productone');
-const producttwo = document.getElementById('producttwo');
-const productthree = document.getElementById('productthree');
-
 let allProducts = [];
 let previousProductImage = [];
 let currentProductImage = [];
@@ -17,7 +13,7 @@ let clickCount = 0;
 
 function ProductImage(name, extension) {
   this.extension = extension;
-  this.filepath = `../assets/${name}.${extension}`;
+  this.filepath = `./../assets/${name}.${extension}`;
   this.name = name;
   this.views = 0;
   this.votes = 0;
@@ -98,8 +94,6 @@ function handleProductImageClick() {
   if (clickCount <= 25) {
     showRandomProductImage();
     clickCount++;
-  } else {
-    alert('Votes are limited to 25 per visit.')
   }
 }
 
@@ -120,10 +114,6 @@ showRandomProductImage();
 // Charts rendered using Chart JS v.2.6.0
 // http://www.chartjs.org/
 // ++++++++++++++++++++++++++++++++++++++++++++
-const canvasTag = document.getElementById('product-chart');
-const widthAttribute = document.createAttribute('width');
-const heightAttribute = document.createAttribute('height');
-
 let chartRendered = false;
 let productChart;
 let votes = [];
@@ -190,11 +180,6 @@ function updateChartData() {
 }
 
 function renderChart() {
-  widthAttribute.value = '800px';
-  heightAttribute.value = '400px';
-  canvasTag.setAttributeNode(widthAttribute);
-  canvasTag.setAttributeNode(heightAttribute);
-
   const ctx = document.getElementById('product-chart').getContext('2d');
   productChart = new Chart(ctx, {
     type: 'bar',
@@ -220,10 +205,6 @@ function renderChart() {
 }
 
 function clearChart() {
-  // widthAttribute.value = '0px';
-  // heightAttribute.value = '00px';
-  // canvasTag.setAttributeNode(widthAttribute);
-  // canvasTag.setAttributeNode(heightAttribute);
   votes = [];
   names = [];
   data.labels = names;
