@@ -100,7 +100,6 @@ function showRandomProductImage() {
       title: product.name,
     });
   }
-
   allProductsStringified = allProducts;
 }
 
