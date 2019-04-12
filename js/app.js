@@ -14,7 +14,7 @@ let clickCount = 0;
 
 function ProductImage(name, extension) {
   this.extension = extension;
-  this.filepath = `./../assets/${name}.${extension}`;
+  this.filepath = `./assets/${name}.${extension}`;
   this.name = name;
   this.views = 0;
   this.votes = 0;
